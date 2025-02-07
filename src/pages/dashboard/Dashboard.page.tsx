@@ -25,7 +25,7 @@ const Dashboard = () => {
         <h2
           className={`text-3xl font-bold ${colors.textWhite}`}
         >
-          BENEVOLENT <span className="bg-white text-black px-2">C</span>
+          BENEVOLENT <span className="bg-black text-white px-2">C</span>
         </h2>
       </div>
       <div className={` p-4 grid grid-cols-1 sm:grid-cols-2 gap-4`}>
