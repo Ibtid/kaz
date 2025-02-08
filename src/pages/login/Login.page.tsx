@@ -20,12 +20,12 @@ const Login = () => {
         <h2
           className={`text-3xl font-bold ${colors.textWhite} text-center mb-6`}
         >
-          BENEVOLENT <span className="bg-white text-black px-2">C</span>
+          BENEVOLENT <span className="bg-black text-white px-2">C</span>
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className={`block text-sm font-medium ${colors.textGray}`}>
-              Username
+              Email
             </label>
             <input
               type="email"

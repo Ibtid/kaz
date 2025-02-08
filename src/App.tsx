@@ -9,7 +9,7 @@ const App: FC = () => {
   return (
     <Fragment>
       <BrowserRouter>
-        <ManageTeam />
+        <Login />
       </BrowserRouter>
     </Fragment>
   );
