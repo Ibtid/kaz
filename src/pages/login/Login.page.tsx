@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import colors from "../../colors"; // Import colors
+import { useUser } from "../../context";
+import { useNavigate } from "react-router-dom";
+import UiPaths from "../../paths/uiPaths";
 
 const Login = () => {
+  const { user, setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate(); // Hook for navigation
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setUser(password)
     console.log("Logging in with", email, password);
+    navigate(UiPaths.Dashboard)
   };
 
   return (

@@ -10,8 +10,12 @@ import {
 } from "recharts";
 import image1 from "../../img/avater_one.jpg";
 import AvatarTick from "../../components/common/Avatar.component";
+import UiPaths from "../../paths/uiPaths";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+    const navigate = useNavigate(); // Hook for navigation
+    
   const data: Contributor[] = [
     { name: "User 1", value: 80, avatar: image1 },
     { name: "User 2", value: 70, avatar: image1 },
@@ -49,6 +53,7 @@ const Dashboard = () => {
               .fill(0)
               .map((_, index) => (
                 <div
+                onClick={()=>navigate(UiPaths.MangeTeam)}
                   key={index}
                   className={`${colors.cardBackground} p-4 rounded-lg text-center hover:bg-yellow-500 hover:text-black transition-colors duration-300`}
                 >
@@ -61,44 +66,8 @@ const Dashboard = () => {
         </div>
         
         <TopContributorsChart data={data} />
-        {/* Rules Table */}
-        {/* <div className="w-full max-w-md mt-6">
-        <h3 className="text-yellow-400 text-lg font-bold mb-2">
-          Whoops I did it again rules:
-        </h3>
-        <table className="w-full border border-yellow-400 text-white">
-          <tbody>
-            {[
-              "Fashionably late to meetings?",
-              "Shoes playing hide and seek outside the rack!",
-              "Not refilling the water jug?",
-              "Borrowing without returning?",
-              "Leaving dishes in the sink overnight?",
-              "Ghosting messages in the team chat?",
-              "Chair spinning competitions during work hours?",
-              "Forgetting to mute on Zoom while munching?",
-              "Using someone else's coffee mug?",
-              "Leaving lights on in an empty room?",
-              "Singing off-key in the office?",
-              "Spamming 'Good Morning' in the group chat?",
-              "Forgetting office birthdays?",
-              "Taking the last snack without restocking?",
-              "Too many 'Ums' in presentations?",
-              "Accidentally hitting 'Reply All'?",
-              "Wearing sunglasses indoors like a rockstar?",
-            ].map((rule, index) => (
-              <tr key={index} className="border border-yellow-400">
-                <td className="p-2 text-white">
-                  {index + 1} {rule}
-                </td>
-                <td className="p-2 text-right text-yellow-400 font-bold">
-                  TK. 2,00
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
+      
+       
       </div>
     </div>
   );
