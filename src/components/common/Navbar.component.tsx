@@ -33,17 +33,17 @@ const Navbar = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="relative bg-white p-6 rounded-lg w-11/12 md:w-1/2 h-[50vh]">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="relative bg-white p-6 rounded-lg w-11/12 md:w-1/2 h-[50vh] z-50">
             {/* Close button in top-right corner */}
             <img
-              className="absolute top-4 right-4 bg-red-500 text-white w-6 h-6  rounded-xl cursor-pointer transform rotate-45"
+              className="absolute top-4 right-4 bg-red-500 text-white w-6 h-6 rounded-xl cursor-pointer transform rotate-45"
               onClick={handleCloseModal}
               src={add}
               alt="Close"
             />
             <h2 className="text-xl font-bold mb-4">Company Rules & Fines</h2>
-        
+
             <div className="overflow-y-auto h-[80%]">
               <table className="w-full border border-yellow-400 text-black">
                 <tbody>
@@ -67,4 +67,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
