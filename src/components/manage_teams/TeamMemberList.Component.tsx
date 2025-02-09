@@ -14,11 +14,11 @@ const TeamMemberList: React.FC<TeamMemberListProps> = ({
   handleUserClick,
 }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="">
       <h3 className={`${colors.textPrimary} text-lg font-bold mb-2`}>
         Team Members
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div className="grid gap-3 grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))]">
         {users.map((user, idx) => (
           <div
             key={idx}
@@ -33,7 +33,7 @@ const TeamMemberList: React.FC<TeamMemberListProps> = ({
               alt={`Avatar of ${user.name}`}
             />
             <div>{user.name}</div>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 text-center">
               Contributed: {user.contributedAmount} taka
             </div>
           </div>

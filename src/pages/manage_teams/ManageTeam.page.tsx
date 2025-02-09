@@ -15,7 +15,6 @@ import RulePicker from "../../components/manage_teams/RulePicker.Component";
 import TeamMemberList from "../../components/manage_teams/TeamMemberList.Component";
 import UserDetails from "../../components/manage_teams/UserDetails.Component";
 
-
 const usersData: User[] = [
   { name: "Ayan", image: image1, contributedAmount: 100 },
   { name: "Bob", image: image2, contributedAmount: 150 },
@@ -44,7 +43,7 @@ const ManageTeam = () => {
       const ruleObj = rulesWithFines[selectedRuleIndex];
       const newContribution = {
         id: Date.now(),
-        text: `User ${selectedUser + 1} broke the rule: "${ruleObj.rule}" with a fine of ${ruleObj.fine} taka.`,
+        text: `${usersData[selectedUser].name} broke the rule: "${ruleObj.rule}" with a fine of ${ruleObj.fine} taka.`,
       };
       setContributions([...contributions, newContribution]);
 
@@ -70,35 +69,43 @@ const ManageTeam = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-10 p-4">
-        <TeamMemberList
-          users={users}
-          selectedUser={selectedUser}
-          handleUserClick={handleUserClick}
-        />
-        <div className="space-y-4 pr-4">
-          <UserDetails
+      <div className={`min-h-screen flex flex-col ${colors.background}`}>
+        <Navbar />
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-10 p-4 flex-grow">
+          <TeamMemberList
             users={users}
             selectedUser={selectedUser}
-            selectedRuleIndex={selectedRuleIndex}
-            showFineText={showFineText}
-            rulesWithFines={rulesWithFines}
-            handleFineClick={handleFineClick}
-            setSelectedUser={setSelectedUser}
-            setSelectedRuleIndex={setSelectedRuleIndex}
-            setShowFineText={setShowFineText}
+            handleUserClick={handleUserClick}
           />
-          <RulePicker
-            rulesWithFines={rulesWithFines}
-            selectedRuleIndex={selectedRuleIndex}
-            handleRuleClick={handleRuleClick}
+          <div className="space-y-4 pr-4">
+            <UserDetails
+              users={users}
+              selectedUser={selectedUser}
+              selectedRuleIndex={selectedRuleIndex}
+              showFineText={showFineText}
+              rulesWithFines={rulesWithFines}
+              handleFineClick={handleFineClick}
+              setSelectedUser={setSelectedUser}
+              setSelectedRuleIndex={setSelectedRuleIndex}
+              setShowFineText={setShowFineText}
+            />
+            <RulePicker
+              rulesWithFines={rulesWithFines}
+              selectedRuleIndex={selectedRuleIndex}
+              handleRuleClick={handleRuleClick}
+            />
+          </div>
+          <ContributionList
+            contributions={contributions}
+            removeContribution={removeContribution}
           />
         </div>
-        <ContributionList
-          contributions={contributions}
-          removeContribution={removeContribution}
-        />
+        
+        {/* Footer */}
+        <footer className="w-full py-4 text-center text-sm text-gray-500 bg-gray-200 mt-8">
+          <p>Made for an interview</p>
+        </footer>
       </div>
     </>
   );

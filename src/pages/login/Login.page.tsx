@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import colors from "../../colors"; // Import colors
+import colors from "../../colors";
 import { useUser } from "../../context";
 import { useNavigate } from "react-router-dom";
 import UiPaths from "../../paths/uiPaths";
@@ -8,13 +8,23 @@ const Login = () => {
   const { user, setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Hook for navigation
- 
+  const [showMessage, setShowMessage] = useState(false);
+  const [roleMessage, setRoleMessage] = useState("");
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setUser(password)
+    setUser(password);
     console.log("Logging in with", email, password);
-    navigate(UiPaths.Dashboard)
+    navigate(UiPaths.Dashboard);
+  };
+
+  const handleForgotPasswordClick = () => {
+    setRoleMessage(
+      "The password for CEO is 'ceo', Team lead is 'lead', HR is 'hr'. Use any arbitary email. example: a@gmail.com"
+    );
+
+    setShowMessage(true);
   };
 
   return (
@@ -58,9 +68,17 @@ const Login = () => {
           </div>
           <p
             className={`text-xs ${colors.textGray} text-center cursor-pointer hover:underline`}
+            onClick={handleForgotPasswordClick}
           >
             Forgot Password?
           </p>
+
+          {showMessage && (
+            <p className="text-xs text-center text-red-500 mt-2">
+              {roleMessage}
+            </p>
+          )}
+
           <button
             type="submit"
             className={`w-full py-2 rounded-lg font-bold transition ${

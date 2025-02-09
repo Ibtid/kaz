@@ -12,6 +12,7 @@ import TotalContributionCard from "../../components/dashboard/TotalContributionC
 import DeclarePartyButton from "../../components/dashboard/DeclareParty.Button";
 import TeamsGrid from "../../components/dashboard/TeamsGrid.Component";
 import TopContributorsChart from "../../components/dashboard/TopContributorsChart.componnet";
+import { useUser } from "../../context";
 
 interface Contributor {
   name: string;
@@ -20,6 +21,7 @@ interface Contributor {
 }
 
 const Dashboard = () => {
+  const { user, setUser } = useUser();
   const [showConfetti, setShowConfetti] = useState(false);
   const [totalContribution, setTotalContribution] = useState(0);
   const [data, setData] = useState<Contributor[]>([
@@ -44,25 +46,22 @@ const Dashboard = () => {
     setTotalContribution(total);
   }, [teams]);
 
- const handlePartyClick = () => {
-
-  setShowConfetti(true);
-
-  setData((prevData) =>
-    prevData.map((contributor) => ({ ...contributor, value: 0 }))
-  );
-  setTeams((prevTeams) => prevTeams.map((team) => ({ ...team, value: 0 })));
-};
-
+  const handlePartyClick = () => {
+    setShowConfetti(true);
+    setData((prevData) =>
+      prevData.map((contributor) => ({ ...contributor, value: 0 }))
+    );
+    setTeams((prevTeams) => prevTeams.map((team) => ({ ...team, value: 0 })));
+  };
 
   const isBalanceZero = totalContribution === 0;
 
   return (
     <>
-           <div className={`min-h-screen ${colors.background}`}>
+      <div className={`min-h-screen flex flex-col ${colors.background}`}>
         <Navbar />
 
-        <div className={`p-4 grid grid-cols-1 sm:grid-cols-2 gap-4`}>
+        <div className={`p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow`}>
           <div className="flex flex-col justify-center items-center">
             <TotalContributionCard totalContribution={totalContribution} />
             <TeamsGrid teams={teams} />
@@ -70,12 +69,20 @@ const Dashboard = () => {
           <div className="flex flex-col justify-center items-center">
             <TopContributorsChart data={data} />
           </div>
-          <DeclarePartyButton
-            handlePartyClick={handlePartyClick}
-            isBalanceZero={isBalanceZero}
-          />
+          {user == "ceo" && (
+            <DeclarePartyButton
+              handlePartyClick={handlePartyClick}
+              isBalanceZero={isBalanceZero}
+            />
+          )}
         </div>
+
+        {/* Footer */}
+        <footer className="w-full py-4 text-center text-sm text-gray-500 bg-gray-200 mt-8">
+          <p>Made for an interview</p>
+        </footer>
       </div>
+
       {showConfetti && <Confetti />}
     </>
   );
