@@ -1,3 +1,9 @@
+## Credentials
+### Passwords: If you are a CEO use ceo, if you are a team lead use lead, if you are a HR use hr. 
+### Email: Use any valid emails. 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
